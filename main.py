@@ -2,7 +2,7 @@
 """
 Created on Mon Nov  6 16:46:14 2023
 
-Members : Lucie Michelet, Audrey Duthil, Kim Lerabo
+Author : Lucie Michelet
 
 """
 
@@ -12,6 +12,16 @@ import numpy as np
 
 #%% Bibliothèque
 def mass_check(mu,m,nb_stage):
+    
+    """
+    This function is checking if the mass of the launcher satisfies the requirements.
+    
+    mu : mass of the payload 
+    m : structural mass
+    nb_stage : the number of stage of the launcher
+    
+    """
+    
     #Structural mass per stage (kg)
     min_ms = [500,200,200]
     max_ms = [100000,80000,50000]
@@ -48,6 +58,13 @@ def mass_check(mu,m,nb_stage):
     #Ajouter le check pour un stage = 1 ou 3
 
 def losses(z):
+    
+    """
+    It calculates the losses in velocity of the launcher between 200 and 1800km.
+    
+    z : the altitude
+    
+    """
     #m/s
     if z > 200 and z < 1800:
         result = 2.452*(10**-3)*z**2+1.051*z+1387.5
@@ -57,6 +74,10 @@ def losses(z):
         
         
 def mass_calcul(k,mu,a):
+    """
+    Calculates the mass after using the lagrange method.
+    """
+    
     if len(k)== 3 :
         Mi = [0,0,mu/a[2]]
         Mi[1] = Mi[2]/a[1]
@@ -77,12 +98,16 @@ def mass_calcul(k,mu,a):
 
 #%% Characteristic of stages and propellant 
 
-ISP_solid = [266,295,295] #s        stage 1 only
+ISP_solid = [266,295,295] #s       stage 1 only
 ISP_petrol = [285,320,320] #s      stage 1,2,3
-ISP_liquid = [0,450,450] #s           stage 2 and 3
+ISP_liquid = [0,450,450] #s        stage 2 and 3
 
 K = [0.12,0.16,0.25]
 
+
+#%% There is four different missions that we worked on. The aim of all of them 
+# is to define the best size of a launcher and the best ergol combinaison to 
+# minimize the mass.
 
 #%%------------------------------Mission 1------------------------------------
 #                                  CNES
@@ -169,7 +194,7 @@ print("semi-major axis : ",ax,"\neccentricity : ",e,"\nApogee alt : ",za,"km\nPe
 
 webbrowser.open("http://josselin.desmars.free.fr/work/teaching/launcher/v23/")
 
-# MISSION REUSSIE !!!
+# Mission succed !!!
 
 #%%------------------------------Mission 2------------------------------------
 #                                Roscosmos
@@ -253,7 +278,6 @@ print("semi-major axis : ",ax,"\neccentricity : ",e,"\nApogee alt : ",za,"km\nPe
 
 webbrowser.open("http://josselin.desmars.free.fr/work/teaching/launcher/v23/")
 
-#MISSION FAILED : PB PERIGEE INCLINAISON
 
 #%%------------------------------Mission 3------------------------------------
 #                                Eutelsat
